@@ -1,0 +1,197 @@
+import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, ArrowUpRight } from 'lucide-react'
+
+const navLinks = [
+  { label: 'Services', href: '/services' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+]
+
+function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [location])
+
+  return (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'bg-white/95 backdrop-blur-sm border-b border-border' : 'bg-transparent'
+      }`}
+    >
+      <nav className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="w-8 h-8 bg-primary flex items-center justify-center">
+            <span className="text-white text-xs font-display font-medium tracking-wide">K</span>
+          </div>
+          <div className="flex flex-col leading-none">
+            <span className="text-primary font-sans font-semibold text-sm tracking-wide">KRMN</span>
+            <span className="text-slate-400 text-[10px] tracking-editorial uppercase font-sans font-light">& Associates</span>
+          </div>
+        </Link>
+
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              to={link.href}
+              className={`text-sm font-sans transition-colors duration-200 ${
+                location.pathname === link.href
+                  ? 'text-primary font-medium'
+                  : 'text-slate-500 hover:text-primary'
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
+          <Link
+            to="/contact"
+            className="flex items-center gap-1.5 bg-primary text-white text-sm font-sans font-medium px-4 py-2 hover:bg-secondary transition-colors duration-200"
+          >
+            Schedule a Call
+            <ArrowUpRight size={14} />
+          </Link>
+        </div>
+
+        {/* Mobile menu toggle */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden text-primary p-1"
+          aria-label="Toggle menu"
+        >
+          {menuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </nav>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden bg-white border-b border-border px-6 pb-6 pt-2"
+          >
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                to={link.href}
+                className="block py-3 text-sm font-sans text-slate-600 border-b border-border/50 hover:text-primary transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              to="/contact"
+              className="mt-4 flex items-center justify-center gap-1.5 bg-primary text-white text-sm font-medium py-3"
+            >
+              Schedule a Call
+              <ArrowUpRight size={14} />
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
+  )
+}
+
+function Footer() {
+  return (
+    <footer className="bg-primary text-white">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8">
+          {/* Brand */}
+          <div className="md:col-span-1">
+            <div className="flex items-center gap-3 mb-5">
+              <div className="w-8 h-8 bg-white/10 border border-white/20 flex items-center justify-center">
+                <span className="text-white text-xs font-display font-medium">K</span>
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="text-white font-sans font-semibold text-sm tracking-wide">KRMN</span>
+                <span className="text-white/40 text-[10px] tracking-editorial uppercase font-light">& Associates</span>
+              </div>
+            </div>
+            <p className="text-white/50 text-sm font-sans leading-relaxed max-w-xs">
+              Chartered Accountants. Trusted advisors to businesses across India since 2011.
+            </p>
+            <p className="text-white/30 text-xs mt-4 font-sans tracking-wide uppercase">ICAI FRN: 013727S</p>
+          </div>
+
+          {/* Services */}
+          <div>
+            <p className="text-white/40 text-[10px] tracking-editorial uppercase mb-5 font-sans">Services</p>
+            <ul className="space-y-3">
+              {['Audit & Assurance', 'Direct Tax', 'GST & Indirect Tax', 'CFO Advisory', 'Corporate Law', 'Valuation'].map(s => (
+                <li key={s}>
+                  <Link to="/services" className="text-white/60 text-sm hover:text-white transition-colors font-sans">{s}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Company */}
+          <div>
+            <p className="text-white/40 text-[10px] tracking-editorial uppercase mb-5 font-sans">Company</p>
+            <ul className="space-y-3">
+              {[['About', '/about'], ['Our Partners', '/about#partners'], ['Contact', '/contact']].map(([label, href]) => (
+                <li key={label}>
+                  <Link to={href} className="text-white/60 text-sm hover:text-white transition-colors font-sans">{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <p className="text-white/40 text-[10px] tracking-editorial uppercase mb-5 font-sans">Contact</p>
+            <ul className="space-y-3">
+              <li>
+                <a href="mailto:info@krmn.in" className="text-white/60 text-sm hover:text-white transition-colors font-sans">info@krmn.in</a>
+              </li>
+              <li>
+                <a href="tel:+919036635523" className="text-white/60 text-sm hover:text-white transition-colors font-sans">+91 90366 35523</a>
+              </li>
+              <li>
+                <p className="text-white/40 text-xs leading-relaxed font-sans">
+                  No.1231, Flat F01, Sai Krishna Residency,<br />
+                  48th Cross, 37th Main,<br />
+                  Poornapragna Layout,<br />
+                  Bengaluru – 560 061
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-16 pt-6 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+          <p className="text-white/30 text-xs font-sans">© {new Date().getFullYear()} KRMN & Associates. All rights reserved.</p>
+          <p className="text-white/20 text-xs font-sans">Chartered Accountants · Bengaluru, India</p>
+        </div>
+      </div>
+    </footer>
+  )
+}
+
+export default function Layout({ children }) {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-1">{children}</main>
+      <Footer />
+    </div>
+  )
+}
