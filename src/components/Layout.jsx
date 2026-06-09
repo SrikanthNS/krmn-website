@@ -24,21 +24,38 @@ function Navbar() {
     setMenuOpen(false)
   }, [location])
 
+  // When hero is dark and navbar is transparent, use white text.
+  // Once scrolled, switch to white bg + dark text.
+  const isLight = scrolled
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-sm border-b border-border' : 'bg-transparent'
+        isLight
+          ? 'bg-white/95 backdrop-blur-sm border-b border-[#E2E8F0]'
+          : 'bg-transparent'
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-8 h-8 bg-primary flex items-center justify-center">
-            <span className="text-white text-xs font-display font-medium tracking-wide">K</span>
+          <div className={`w-8 h-8 flex items-center justify-center transition-colors duration-300 ${
+            isLight ? 'bg-[#0F172A]' : 'bg-white/15 border border-white/30'
+          }`}>
+            <span className="text-white text-xs font-semibold tracking-wide">K</span>
           </div>
           <div className="flex flex-col leading-none">
-            <span className="text-primary font-sans font-semibold text-sm tracking-wide">KRMN</span>
-            <span className="text-slate-400 text-[10px] tracking-editorial uppercase font-sans font-light">& Associates</span>
+            <span className={`font-semibold text-sm tracking-wide transition-colors duration-300 ${
+              isLight ? 'text-[#0F172A]' : 'text-white'
+            }`}>
+              KRMN
+            </span>
+            <span className={`text-[10px] tracking-widest uppercase font-light transition-colors duration-300 ${
+              isLight ? 'text-slate-400' : 'text-white/50'
+            }`}>
+              & Associates
+            </span>
           </div>
         </Link>
 
@@ -48,10 +65,12 @@ function Navbar() {
             <Link
               key={link.href}
               to={link.href}
-              className={`text-sm font-sans transition-colors duration-200 ${
+              className={`text-sm transition-colors duration-200 ${
                 location.pathname === link.href
-                  ? 'text-primary font-medium'
-                  : 'text-slate-500 hover:text-primary'
+                  ? isLight ? 'text-[#0F172A] font-medium' : 'text-white font-medium'
+                  : isLight
+                    ? 'text-slate-500 hover:text-[#0F172A]'
+                    : 'text-white/70 hover:text-white'
               }`}
             >
               {link.label}
@@ -59,7 +78,11 @@ function Navbar() {
           ))}
           <Link
             to="/contact"
-            className="flex items-center gap-1.5 bg-primary text-white text-sm font-sans font-medium px-4 py-2 hover:bg-secondary transition-colors duration-200"
+            className={`flex items-center gap-1.5 text-sm font-medium px-4 py-2 transition-colors duration-200 ${
+              isLight
+                ? 'bg-[#0F172A] text-white hover:bg-[#1E293B]'
+                : 'bg-white text-[#0F172A] hover:bg-white/90'
+            }`}
           >
             Schedule a Call
             <ArrowUpRight size={14} />
@@ -69,14 +92,16 @@ function Navbar() {
         {/* Mobile menu toggle */}
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-primary p-1"
+          className={`md:hidden p-1 transition-colors duration-200 ${
+            isLight ? 'text-[#0F172A]' : 'text-white'
+          }`}
           aria-label="Toggle menu"
         >
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — always white bg */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -84,20 +109,20 @@ function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden bg-white border-b border-border px-6 pb-6 pt-2"
+            className="md:hidden bg-white border-b border-[#E2E8F0] px-6 pb-6 pt-2"
           >
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className="block py-3 text-sm font-sans text-slate-600 border-b border-border/50 hover:text-primary transition-colors"
+                className="block py-3 text-sm text-slate-600 border-b border-slate-100 hover:text-[#0F172A] transition-colors"
               >
                 {link.label}
               </Link>
             ))}
             <Link
               to="/contact"
-              className="mt-4 flex items-center justify-center gap-1.5 bg-primary text-white text-sm font-medium py-3"
+              className="mt-4 flex items-center justify-center gap-1.5 bg-[#0F172A] text-white text-sm font-medium py-3"
             >
               Schedule a Call
               <ArrowUpRight size={14} />
