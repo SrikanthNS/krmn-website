@@ -27,7 +27,7 @@ function Reveal({ children, delay = 0, className = '' }) {
 const serviceOptions = [
   'Audit & Assurance',
   'Direct Tax',
-  'GST & Indirect Tax',
+  'Indirect Tax',
   'CFO & Financial Advisory',
   'Corporate Law',
   'Valuation Services',

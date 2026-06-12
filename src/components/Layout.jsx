@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
+import caLogo from '../assets/ca.png'
 
 const navLinks = [
   { label: 'Services', href: '/services' },
   { label: 'About', href: '/about' },
+  { label: 'Careers', href: '/careers' },
   { label: 'Contact', href: '/contact' },
 ]
 
@@ -40,10 +42,8 @@ function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
-          <div className={`w-8 h-8 flex items-center justify-center transition-colors duration-300 ${
-            isLight ? 'bg-[#0F172A]' : 'bg-white/15 border border-white/30'
-          }`}>
-            <span className="text-white text-xs font-semibold tracking-wide">K</span>
+          <div className="w-10 h-10 flex items-center justify-center overflow-hidden rounded bg-white shadow-sm">
+            <img src={caLogo} alt="KRMN logo" className="w-9 h-9 object-contain" />
           </div>
           <div className="flex flex-col leading-none">
             <span className={`font-semibold text-sm tracking-wide transition-colors duration-300 ${
@@ -160,9 +160,18 @@ function Footer() {
           <div>
             <p className="text-white/40 text-[10px] tracking-editorial uppercase mb-5 font-sans">Services</p>
             <ul className="space-y-3">
-              {['Audit & Assurance', 'Direct Tax', 'GST & Indirect Tax', 'CFO Advisory', 'Corporate Law', 'Valuation'].map(s => (
-                <li key={s}>
-                  <Link to="/services" className="text-white/60 text-sm hover:text-white transition-colors font-sans">{s}</Link>
+              {[
+                ['Audit & Assurance', '/services#audit'],
+                ['Direct Tax', '/services#direct-tax'],
+                ['Indirect Tax', '/services#indirect-tax'],
+                ['CFO Advisory', '/services#cfo-advisory'],
+                ['Corporate Law', '/services#corporate-law'],
+                ['Valuation', '/services#valuation'],
+                ['Startup Advisory', '/services#startup-advisory'],
+                ['Regulatory Compliance', '/services#compliance'],
+              ].map(([label, href]) => (
+                <li key={label}>
+                  <Link to={href} className="text-white/60 text-sm hover:text-white transition-colors font-sans">{label}</Link>
                 </li>
               ))}
             </ul>
@@ -172,7 +181,7 @@ function Footer() {
           <div>
             <p className="text-white/40 text-[10px] tracking-editorial uppercase mb-5 font-sans">Company</p>
             <ul className="space-y-3">
-              {[['About', '/about'], ['Our Partners', '/about#partners'], ['Contact', '/contact']].map(([label, href]) => (
+              {[['About', '/about'], ['Our Partners', '/about#partners'], ['Careers', '/careers'], ['Contact', '/contact']].map(([label, href]) => (
                 <li key={label}>
                   <Link to={href} className="text-white/60 text-sm hover:text-white transition-colors font-sans">{label}</Link>
                 </li>

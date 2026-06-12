@@ -29,7 +29,7 @@ const timeline = [
   { year: '2011', event: 'Founded as Kishore & Co., Chartered Accountants in Bengaluru.' },
   { year: '2018', event: 'Reconstituted as KRMN & Associates. Expanded practice areas and team depth.' },
   { year: '2022', event: 'CA Rakesh K A joins as Partner, bringing IFC, IND AS, and international tax expertise.' },
-  { year: '2024', event: 'Serving 200+ clients across startups, SMEs, and corporates across India.' },
+  { year: '2024', event: 'Serving 1000+ clients across startups, SMEs, and corporates across India.' },
 ]
 
 const values = [
@@ -106,7 +106,7 @@ export default function About() {
               <div className="grid grid-cols-2 gap-px bg-border">
                 {[
                   { value: '15+', label: 'Years in Practice', sub: 'Since 2011' },
-                  { value: '200+', label: 'Clients Served', sub: 'Across India' },
+                  { value: '1000+', label: 'Clients Served', sub: 'Across India' },
                   { value: '9', label: 'Practice Areas', sub: 'Under one roof' },
                   { value: '2', label: 'Senior Partners', sub: 'FCA & ACA' },
                 ].map(({ value, label, sub }) => (
@@ -180,7 +180,7 @@ export default function About() {
             <div className="w-8 h-px bg-slate-300 mb-6" />
             <p className="text-slate-400 text-xs tracking-editorial uppercase mb-3 font-sans">Leadership</p>
             <h2 className="font-display font-normal text-primary text-4xl md:text-5xl leading-tight mb-16">
-              The partners.
+              The Partners.
             </h2>
           </Reveal>
 

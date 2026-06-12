@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
 import {
@@ -70,7 +70,7 @@ const services = [
   {
     id: 'indirect-tax',
     icon: TrendingUp,
-    title: 'GST & Indirect Tax',
+    title: 'Indirect Tax',
     tagline: 'End-to-end. Proactive. Resolved.',
     description: 'Full-spectrum GST advisory, compliance, and representation — from registration to dispute resolution.',
     items: [
@@ -180,6 +180,24 @@ const services = [
 ]
 
 export default function Services() {
+  const [activeId, setActiveId] = useState(services[0].id)
+
+  useEffect(() => {
+    const observers = []
+    services.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (!el) return
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveId(id)
+        },
+        { rootMargin: '-20% 0px -70% 0px' }
+      )
+      observer.observe(el)
+      observers.push(observer)
+    })
+    return () => observers.forEach(o => o.disconnect())
+  }, [])
   return (
     <>
       {/* Page header */}
@@ -211,7 +229,11 @@ export default function Services() {
               <a
                 key={s.id}
                 href={`#${s.id}`}
-                className="text-xs font-sans text-slate-500 hover:text-primary px-3 py-2 hover:bg-white transition-colors whitespace-nowrap rounded"
+                className={`text-xs font-sans px-3 py-2 whitespace-nowrap rounded transition-colors ${
+                  activeId === s.id
+                    ? 'text-primary bg-white font-medium'
+                    : 'text-slate-500 hover:text-primary hover:bg-white'
+                }`}
               >
                 {s.title}
               </a>

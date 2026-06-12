@@ -38,31 +38,37 @@ function Rule() {
 /* ─── Services Data ─── */
 const services = [
   {
+    id: 'audit',
     icon: Shield,
     title: 'Audit & Assurance',
     desc: 'Statutory, internal, tax and GST audits. Independent, thorough, and actionable.',
   },
   {
+    id: 'direct-tax',
     icon: FileText,
     title: 'Direct Tax',
     desc: 'Income tax compliance, planning, assessments, transfer pricing, and cross-border advisory.',
   },
   {
+    id: 'indirect-tax',
     icon: TrendingUp,
-    title: 'GST & Indirect Tax',
+    title: 'Indirect Tax',
     desc: 'End-to-end GST compliance, advisory, audits, refunds, and dispute resolution.',
   },
   {
+    id: 'cfo-advisory',
     icon: BarChart2,
     title: 'CFO & Financial Advisory',
     desc: 'Strategic financial oversight, fund sourcing, forecasting, and investment structuring.',
   },
   {
+    id: 'corporate-law',
     icon: Briefcase,
     title: 'Corporate Law',
     desc: 'Company incorporation, restructuring, compliance, and MCA filings.',
   },
   {
+    id: 'valuation',
     icon: Scale,
     title: 'Valuation Services',
     desc: 'Business, ESOP, intangible asset, and related-party transaction valuations.',
@@ -72,8 +78,7 @@ const services = [
 /* ─── Stats ─── */
 const stats = [
   { value: '15+', label: 'Years in Practice' },
-  { value: '200+', label: 'Clients Served' },
-  { value: '9', label: 'Practice Areas' },
+  { value: '1000+', label: 'Clients Served' },
   { value: '2011', label: 'Established' },
 ]
 
@@ -193,7 +198,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-px border border-white/10 divide-x divide-y md:divide-y-0 divide-white/10"
+            className="mt-24 grid grid-cols-3 gap-px border border-white/10 divide-x divide-y md:divide-y-0 divide-white/10"
           >
             {stats.map(({ value, label }) => (
               <div key={label} className="px-6 py-5">
@@ -232,7 +237,7 @@ export default function Home() {
           </Reveal>
 
           <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
-            {services.map(({ icon: Icon, title, desc }, i) => (
+            {services.map(({ id, icon: Icon, title, desc }, i) => (
               <Reveal key={title} delay={i * 0.06}>
                 <div className="bg-white p-8 group hover:bg-surface transition-colors duration-200 h-full">
                   <div className="w-9 h-9 border border-border flex items-center justify-center mb-6 group-hover:border-accent/30 group-hover:bg-accent/5 transition-colors">
@@ -241,7 +246,7 @@ export default function Home() {
                   <h3 className="font-sans font-semibold text-primary text-base mb-3">{title}</h3>
                   <p className="text-slate-500 text-sm leading-relaxed font-sans">{desc}</p>
                   <div className="mt-6 flex items-center gap-1.5 text-accent text-xs font-sans opacity-0 group-hover:opacity-100 transition-opacity">
-                    <Link to="/services">Learn more</Link>
+                    <Link to={`/services#${id}`}>Learn more</Link>
                     <ArrowUpRight size={12} />
                   </div>
                 </div>
@@ -339,7 +344,7 @@ export default function Home() {
             <Rule />
             <p className="text-slate-400 text-xs tracking-editorial uppercase mb-3 font-sans">Leadership</p>
             <h2 className="font-display font-normal text-primary text-4xl md:text-5xl leading-tight mb-16">
-              The partners.
+              The Partners.
             </h2>
           </Reveal>
 
