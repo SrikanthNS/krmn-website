@@ -2,8 +2,6 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
 import { ArrowUpRight, CheckCircle2 } from 'lucide-react'
-import kishorPhoto from '../assets/kishor.jpeg'
-import rakeshPhoto from '../assets/rakesh.jpeg'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -192,8 +190,8 @@ export default function About() {
               <div className="bg-white p-10 md:p-14">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
                   <div className="md:col-span-3">
-                    <div className="w-16 h-16 overflow-hidden mb-4">
-                      <img src={kishorPhoto} alt="Kishore N S" className="w-16 h-16 object-cover" />
+                    <div className="w-10 h-10 bg-primary flex items-center justify-center mb-4">
+                      <span className="font-display text-white text-lg">K</span>
                     </div>
                     <h3 className="font-sans font-semibold text-primary text-xl mb-1">Kishore N S</h3>
                     <p className="text-slate-400 text-xs tracking-editorial uppercase font-sans mb-1">BBM, FCA</p>
@@ -232,8 +230,8 @@ export default function About() {
               <div className="bg-white p-10 md:p-14">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
                   <div className="md:col-span-3">
-                    <div className="w-16 h-16 overflow-hidden mb-4">
-                      <img src={rakeshPhoto} alt="Rakesh K A" className="w-18 h-18 object-cover" />
+                    <div className="w-10 h-10 bg-secondary flex items-center justify-center mb-4">
+                      <span className="font-display text-white text-lg">R</span>
                     </div>
                     <h3 className="font-sans font-semibold text-primary text-xl mb-1">Rakesh K A</h3>
                     <p className="text-slate-400 text-xs tracking-editorial uppercase font-sans mb-1">BCom, ACA</p>

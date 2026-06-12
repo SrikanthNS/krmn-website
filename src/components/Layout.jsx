@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
+import caLogo from '../assets/ca.png'
 
 const navLinks = [
   { label: 'Services', href: '/services' },
@@ -41,6 +42,9 @@ function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 group">
+          <div className="w-10 h-10 flex items-center justify-center overflow-hidden rounded bg-white shadow-sm">
+            <img src={caLogo} alt="KRMN logo" className="w-9 h-9 object-contain" />
+          </div>
           <div className="flex flex-col leading-none">
             <span className={`font-semibold text-sm tracking-wide transition-colors duration-300 ${
               isLight ? 'text-[#0F172A]' : 'text-white'
