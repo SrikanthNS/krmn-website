@@ -4,11 +4,11 @@
 
 @layer base {
   :root {
-    --color-primary: #0F172A;
-    --color-secondary: #1E293B;
-    --color-accent: #2563EB;
-    --color-surface: #F8FAFC;
-    --color-border: #E2E8F0;
+    --color-primary: #0f172a;
+    --color-secondary: #1e293b;
+    --color-accent: #2563eb;
+    --color-surface: #f8fafc;
+    --color-border: #e2e8f0;
   }
 
   * {
@@ -17,18 +17,22 @@
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     @apply bg-white text-primary font-sans;
-    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1,
+      "calt" 1;
   }
 
   ::selection {
-    background: #2563EB20;
-    color: #0F172A;
+    background: #2563eb20;
+    color: #0f172a;
   }
 }
 
@@ -51,12 +55,12 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F8FAFC;
+  background: #f8fafc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #cbd5e1;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #94a3b8;
 }

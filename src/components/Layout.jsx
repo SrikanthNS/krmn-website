@@ -44,8 +44,10 @@ function Navbar() {
           <div className="w-10 h-10 flex items-center justify-center overflow-hidden rounded bg-white shadow-sm">
             <img
               src={caLogo}
-              alt="KRMN logo"
+              alt="KRMN & Associates — Chartered Accountants logo"
               className="w-9 h-9 object-contain"
+              width="36"
+              height="36"
             />
           </div>
           <div className="flex flex-col leading-none">
@@ -180,7 +182,7 @@ function Footer() {
               Chartered Accountants. Trusted advisors to businesses across India
               since 2011.
             </p>
-            <p className="text-white/30 text-xs mt-4 font-sans tracking-wide uppercase">
+            <p className="text-white/50 text-xs mt-4 font-sans tracking-wide uppercase">
               ICAI FRN: 013727S
             </p>
           </div>
@@ -260,7 +262,7 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <p className="text-white/40 text-xs leading-relaxed font-sans">
+                <p className="text-white/60 text-xs leading-relaxed font-sans">
                   No.1231, Flat F01, Sai Krishna Residency,
                   <br />
                   48th Cross, 37th Main,
@@ -275,10 +277,10 @@ function Footer() {
         </div>
 
         <div className="mt-16 pt-6 border-t border-white/10 flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <p className="text-white/30 text-xs font-sans">
+          <p className="text-white/50 text-xs font-sans">
             © {new Date().getFullYear()} KRMN & Associates. All rights reserved.
           </p>
-          <p className="text-white/20 text-xs font-sans">
+          <p className="text-white/40 text-xs font-sans">
             Chartered Accountants · Bengaluru, India
           </p>
         </div>
@@ -290,8 +292,16 @@ function Footer() {
 export default function Layout({ children }) {
   return (
     <div className="min-h-screen flex flex-col">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:text-sm"
+      >
+        Skip to content
+      </a>
       <Navbar />
-      <main className="flex-1">{children}</main>
+      <main id="main-content" className="flex-1">
+        {children}
+      </main>
       <Footer />
     </div>
   );
